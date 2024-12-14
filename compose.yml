@@ -1,0 +1,22 @@
+services:
+  webdav-client:
+    image: sec77/webdavclient
+    container_name: webdav-client
+    environment:
+      - WEBDRIVE_USERNAME=<USERNAME>
+      - WEBDRIVE_PASSWORD=<PASSWORD>
+      - WEBDRIVE_URL=<URL>
+      - DAVFS2_ASK_AUTH=0
+      - OWNER=1000
+      - GROUP=1000
+    devices:
+      - /dev/fuse
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      - /tmp/magenta:/mnt/webdrive:rshared
+    stdin_open: true
+    tty: true
+    restart: "no"
