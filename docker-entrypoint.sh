@@ -49,7 +49,7 @@ if [ ! -d $DEST ]; then
 fi
 
 # Deal with group
-if [ $GROUP=0 -gt 0 ]; then
+if [ $GROUP -gt 0 ]; then
     addgroup --gid $GROUP webdrive_group
     chown webdrive:webdrive_group $DEST
 fi
@@ -65,7 +65,7 @@ fi
 # Mount and verify that something is present. davfs2 always creates a lost+found
 # sub-directory, so we can use the presence of some file/dir as a marker to
 # detect that mounting was a success. Execute the command on success.
-mount -t davfs $WEBDRIVE_URL $DEST -o uid=$OWNER,gid=users,dir_mode=755,file_mode=755
+mount -t davfs $WEBDRIVE_URL $DEST -o uid=$OWNER,gid=$GROUP,dir_mode=755,file_mode=755
 if [ -n "$(ls -1A $DEST)" ]; then
     echo "Mounted $WEBDRIVE_URL onto $DEST"
     exec "$@"
