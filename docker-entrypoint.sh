@@ -48,11 +48,19 @@ if [ ! -d $DEST ]; then
     mkdir -p $DEST
 fi
 
+# Deal with group
+if [ $GROUP=0 -gt 0 ]; then
+    addgroup --gid $GROUP webdrive_group
+    chown webdrive:webdrive_group $DEST
+fi
+
 # Deal with ownership
 if [ $OWNER -gt 0 ]; then
     adduser webdrive -u $OWNER -D -G users
     chown webdrive $DEST
 fi
+
+
 
 # Mount and verify that something is present. davfs2 always creates a lost+found
 # sub-directory, so we can use the presence of some file/dir as a marker to
