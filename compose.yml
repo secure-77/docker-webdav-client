@@ -9,6 +9,8 @@ services:
       - DAVFS2_ASK_AUTH=0
       - OWNER=1000
       - GROUP=1000
+      - FOLDERPERM=750
+      - FILEPERM=750
     devices:
       - /dev/fuse
     cap_add:
@@ -16,7 +18,7 @@ services:
     security_opt:
       - apparmor=unconfined
     volumes:
-      - /tmp/magenta:/mnt/webdrive:rshared
+      - /tmp/webdav:/mnt/webdrive:rshared
     stdin_open: true
     tty: true
     restart: "no"

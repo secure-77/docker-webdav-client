@@ -20,6 +20,8 @@ ENV WEBDRIVE_PASSWORD_FILE=
 # User ID of share owner
 ENV OWNER=0
 ENV GROUP=0
+ENV FOLDERPERM=750
+ENV FILEPERM=750
 
 # Location of directory where to mount the drive into the container.
 ENV WEBDRIVE_MOUNT=/mnt/webdrive
